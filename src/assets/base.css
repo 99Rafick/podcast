@@ -5,6 +5,9 @@
   --font-family: 'Syne', sans-serif;
 }
 
+*::-webkit-scrollbar {
+  width: 0;
+}
 
 *,
 *::before,
