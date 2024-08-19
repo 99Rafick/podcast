@@ -1,13 +1,21 @@
 
 <template>
-  <main class="w-screen relative object-cover h-screen">
-      <div id="content" class="w-max pl-[calc(50%-10rem)] gap-6 pr-[calc(50%-8rem)] flex items-center justify-center relative h-full bg-slate-900">
+  <main class="w-screen relative object-cover h-screen" 
+      style="background-image: url('https://images.pexels.com/photos/1081685/pexels-photo-1081685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+             background-size: cover;
+             background-position: 50%;
+      ;">
+      <div class="w-full z-0 h-full absolute bg-black/60 backdrop-blur-2xl"></div>
+      <div id="content" class="w-max z-10 pl-[calc(50%-10rem)] gap-6 pr-[calc(50%-8rem)] flex items-center justify-center relative h-full">
           <PodcastCard v-for="(card, index) in cards" 
-                    :key="index" 
+                    :key="index"
                     ref="podcastCards" 
+                    :name="card.name"
                     :image="card.image"
                     :active="card.active">
           </PodcastCard>
+
+          
       </div>
   </main>
 </template>
@@ -21,8 +29,8 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const cards = reactive([
-  {name: 'Elea Miller', active: false, image: "https://images.pexels.com/photos/1081685/pexels-photo-1081685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"},
-  {name: 'Elea Miller', active: false, image: "https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"},
+  {name: 'Elea MILLER', active: false, image: "https://images.pexels.com/photos/1081685/pexels-photo-1081685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"},
+  {name: 'James Cornet', active: false, image: "https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"},
   {name: 'Elea Miller', active: false, image: "https://images.pexels.com/photos/3187171/pexels-photo-3187171.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"},
   {name: 'Elea Miller', active: false, image: "https://images.pexels.com/photos/2179241/pexels-photo-2179241.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"},
   {name: 'Elea Miller', active: false, image: "https://images.pexels.com/photos/2180525/pexels-photo-2180525.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"},
@@ -35,6 +43,7 @@ const cards = reactive([
 onMounted(() => {
   const content = document.querySelector('#content');
   const podcastCards = ref([]);
+  const main = document.querySelector('main')
 
   podcastCards.value = document.querySelectorAll('#content .card');
 
@@ -55,8 +64,13 @@ onMounted(() => {
         podcastCards.value.forEach((card, index) => {
           const cardRect = card.getBoundingClientRect();
           const cardCenterX = cardRect.left + (cardRect.width / 2);
-
-          cards[index].active = Math.abs(midScreenX - cardCenterX) < cardRect.width / 2;
+          
+          const isActive = Math.abs(midScreenX - cardCenterX) < cardRect.width / 2;
+          cards[index].active = isActive;
+          
+          if(isActive) {
+             main.style.backgroundImage = `url('${cards[index].image}')`
+          }
         });
       },
     },
