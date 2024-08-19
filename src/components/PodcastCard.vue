@@ -1,8 +1,15 @@
 <template>
-    <div :class="['h-96 w-72 transition duration-300 ease-out card z-10 flex-none cursor-pointer rounded-3xl overflow-hidden relative', 
-        {'bg-white scale-[0.85]': !active, 'bg-purple-600': active}
+    
+    <div :class="['h-[480px] w-80 transition duration-500 ease-out card z-1000 flex-none cursor-pointer rounded-3xl overflow-hidden relative', 
+        {'scale-[0.75]': !active, 'bg-purple-600': active}
     ]">
-        <div class="h-16 w-full translate-y-full  transition duration-150 ease-in-out bg-white absolute bottom-0">
+
+        <img :class="['w-full h-full object-cover', {'grayscale': !active}]" :src="image" alt="">
+
+    
+        <div :class="['h-20 w-full  transition duration-300 ease-in-out bg-white absolute bottom-0', 
+            {'translate-y-[150%]': !active}
+        ]">
 
         </div>
     </div>
@@ -13,6 +20,7 @@
         active: {
             type: Boolean,
             value: () => false,
-        }
+        },
+        image: String,
     })
 </script>

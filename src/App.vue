@@ -1,10 +1,11 @@
 
 <template>
   <main class="w-screen relative object-cover h-screen">
-      <div id="content" class="w-max pl-[calc(50%-10rem)] pr-[calc(50%-8rem)] flex items-center justify-center relative h-full bg-slate-900">
+      <div id="content" class="w-max pl-[calc(50%-10rem)] gap-6 pr-[calc(50%-8rem)] flex items-center justify-center relative h-full bg-slate-900">
           <PodcastCard v-for="(card, index) in cards" 
                     :key="index" 
-                     ref="podcastCards" 
+                    ref="podcastCards" 
+                    :image="card.image"
                     :active="card.active">
           </PodcastCard>
       </div>
@@ -20,15 +21,15 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const cards = reactive([
-  { active: false },
-  { active: false },
-  { active: false },
-  { active: false },
-  { active: false },
-  { active: false },
-  { active: false },
-  { active: false },
-  { active: false },
+  {name: 'Elea Miller', active: false, image: "https://images.pexels.com/photos/1081685/pexels-photo-1081685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"},
+  {name: 'Elea Miller', active: false, image: "https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"},
+  {name: 'Elea Miller', active: false, image: "https://images.pexels.com/photos/3187171/pexels-photo-3187171.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"},
+  {name: 'Elea Miller', active: false, image: "https://images.pexels.com/photos/2179241/pexels-photo-2179241.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"},
+  {name: 'Elea Miller', active: false, image: "https://images.pexels.com/photos/2180525/pexels-photo-2180525.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"},
+  {name: 'Elea Miller', active: false, image: "https://images.pexels.com/photos/2006726/pexels-photo-2006726.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"},
+  {name: 'Elea Miller', active: false, image: "https://images.pexels.com/photos/2301285/pexels-photo-2301285.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"},
+  {name: 'Elea Miller', active: false, image: "https://images.pexels.com/photos/2973552/pexels-photo-2973552.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"},
+  {name: 'Elea Miller', active: false, image: "https://images.pexels.com/photos/1125328/pexels-photo-1125328.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"},
 ]);
 
 onMounted(() => {
@@ -47,7 +48,7 @@ onMounted(() => {
       start: 'left left',
       end: () => `+=${content.offsetWidth} top`,
       scrub: 1,
-      markers: true,
+      // markers: true,
       onUpdate: () => {
         const midScreenX = window.innerWidth / 2;
 
